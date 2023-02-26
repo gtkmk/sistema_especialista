@@ -1,20 +1,21 @@
 const mysql = require('../mysql');
 const { query } = require('express');
 
-exports.getProblemas = async (req, res, next) => {
+exports.getPerguntas = async (req, res, next) => {
   try {
-    const query = "SELECT * FROM problemas WHERE id_projeto  = ?;";
+    const query = "SELECT * FROM perguntas WHERE id_projeto  = ?;";
     const result = await mysql.execute(query, [
       req.params.id_projeto
     ]);
     if (result.length > 0) {
       const response = {
         quantidade: result.length,
-        problemas: result.map(problema => {
+        perguntas: result.map(pergunta => {
           return {
-            id: problema.id,
-            nome: problema.problema,
-            id_projeto: problema.id_projeto
+            id: pergunta.id,
+            pergunta: pergunta.pergunta,
+            descricao: pergunta.descricao,
+            id_projeto: pergunta.id_projeto
           }
         })
       }
@@ -27,15 +28,16 @@ exports.getProblemas = async (req, res, next) => {
   }
 }
 
-exports.postCreateProblema = async (req, res, next) => {
+exports.postCreatePergunta = async (req, res, next) => {
   try {
-    const query = "INSERT INTO problemas (problema, id_projeto) VALUES (?,?)"
+    const query = "INSERT INTO perguntas (pergunta, descricao, id_projeto) VALUES (?,?,?)"
     const result = await mysql.execute(query, [
-      req.body.problema,
+      req.body.pergunta,
+      req.body.descricao,
       req.params.id_projeto
     ]);
     const response = {
-      mensagem: 'Problema criado com sucesso!',
+      mensagem: 'Pergunta criada com sucesso!',
     }
     return res.status(201).send(response);
   } catch (error) {
@@ -43,15 +45,15 @@ exports.postCreateProblema = async (req, res, next) => {
   }
 }
 
-exports.deleteProblema = async (req, res, next) => {
+exports.deletePergunta = async (req, res, next) => {
   try {
-    const query = "DELETE FROM problemas WHERE id_projeto = ? AND id  = ?"
+    const query = "DELETE FROM perguntas WHERE id_projeto = ? AND id  = ?"
     await mysql.execute(query, [
       req.params.id_projeto,
       req.params.id
     ]);
     const response = {
-      mensagem: 'Problema removido com sucesso',
+      mensagem: 'Pergunta removida com sucesso',
     }
     return res.status(202).send(response);
   } catch (error) {
@@ -59,9 +61,9 @@ exports.deleteProblema = async (req, res, next) => {
   }
 }
 
-exports.getSingleProblema = async (req, res, next) => {
+exports.getSinglePergunta = async (req, res, next) => {
   try {
-    const query = "SELECT * FROM problemas WHERE id_projeto  = ? AND id  = ?;";
+    const query = "SELECT * FROM perguntas WHERE id_projeto  = ? AND id  = ?;";
     const result = await mysql.execute(query, [
       req.params.id_projeto,
       req.params.id
@@ -69,9 +71,10 @@ exports.getSingleProblema = async (req, res, next) => {
     if (result.length > 0) {
       const response = {
         quantidade: result.length,
-        problemas: {
+        pergunta: {
           id: result[0].id,
-          nome: result[0].problema,
+          pergunta: result[0].pergunta,
+          descricao: result[0].descricao,
           id_projeto: result[0].id_projeto
         }
       }

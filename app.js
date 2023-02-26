@@ -4,10 +4,9 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-// const rotaUsuario = require('./routes/usuario');
-// const rotaContas = require('./routes/contas');
 const rotaProjetos = require('./routes/projetos');
 const rotaProblemas = require('./routes/problemas');
+const rotaPerguntas = require('./routes/perguntas');
 
 //app.use(cors());
 app.use((req, res, next) => {
@@ -29,11 +28,9 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// app.use('/usuario', rotaUsuario);
-// app.use('/contas', rotaContas);
-
 app.use('/projetos', rotaProjetos);
 app.use('/problemas', rotaProblemas);
+app.use('/perguntas', rotaPerguntas);
 
 //error 404
 app.use((req, res, next) => {
