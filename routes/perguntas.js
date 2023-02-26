@@ -10,6 +10,9 @@ router.get(
 );
 
 //Insere uma pergunta
+// Parâmetros de entrada body: 
+// body.pergunta,
+// body.descricao,
 router.post(
   '/:id_projeto',
   PerguntasController.postCreatePergunta

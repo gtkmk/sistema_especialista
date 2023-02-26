@@ -10,6 +10,8 @@ router.get(
 );
 
 //Insere um problema
+// Parâmetros de entrada body: 
+// body.problema
 router.post(
   '/:id_projeto',
   ProblemasController.postCreateProblema
