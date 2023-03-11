@@ -9,9 +9,16 @@ router.get(
   ProblemasPerguntasController.getRelacoesProblemaPerguntas
 );
 
+//Retorna todos as perguntas de um projeto
+router.get(
+  '/all/:id_projeto',
+  ProblemasPerguntasController.getRelacoesProjeto
+)
+
 //Insere uma relação problema pergunta
+//Caso de uso: relacionar uma pergunta a um problema.
 router.post(
-  '/:id_problema/:id_pergunta',
+  '/:id_projeto/:id_problema/:id_pergunta',
   ProblemasPerguntasController.postCreateRelacaoProblemaPergunta
 );
 

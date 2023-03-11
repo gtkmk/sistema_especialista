@@ -11,7 +11,7 @@ router.get(
 
 //Insere um projeto
 // Parâmetros de entrada body: 
-// body.problema
+// body.nome
 router.post(
   '/',
   ProjetosController.postCreateProjeto
