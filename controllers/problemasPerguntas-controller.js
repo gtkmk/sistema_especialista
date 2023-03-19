@@ -62,6 +62,7 @@ exports.getRelacoesProjeto = async (req, res, next) => {
             id: pergunta.id,
             pergunta: pergunta.pergunta,
             descricao: pergunta.descricao,
+            justificativa: pergunta.justificativa,
             id_projeto: pergunta.id_projeto,
             id_problema: pergunta.id_problema,
             problema_descricao: pergunta.problema_descricao
