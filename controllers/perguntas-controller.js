@@ -30,10 +30,11 @@ exports.getPerguntas = async (req, res, next) => {
 
 exports.postCreatePergunta = async (req, res, next) => {
   try {
-    const query = "INSERT INTO perguntas (pergunta, descricao, id_projeto) VALUES (?,?,?)"
+    const query = "INSERT INTO perguntas (pergunta, descricao, justificativa, id_projeto) VALUES (?,?,?,?)"
     const result = await mysql.execute(query, [
       req.body.pergunta,
       req.body.descricao,
+      req.body.justificativa,
       req.params.id_projeto
     ]);
     const response = {

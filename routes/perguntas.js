@@ -13,6 +13,7 @@ router.get(
 // Parâmetros de entrada body: 
 // body.pergunta,
 // body.descricao,
+// body.justificativa
 router.post(
   '/:id_projeto',
   PerguntasController.postCreatePergunta
